@@ -3,6 +3,13 @@
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
         <Nullable>enable</Nullable>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Title>Sagittaras Repository Pattern</Title>
+        <Authors>Sagittaras Games</Authors>
+        <Copyright>Sagittaras Games</Copyright>
+        <PackageProjectUrl>https://github.com/sagittaras/repository</PackageProjectUrl>
+        <PackageLicenseUrl>https://github.com/sagittaras/repository/blob/master/LICENSE</PackageLicenseUrl>
+        <RepositoryUrl>https://github.com/sagittaras/repository</RepositoryUrl>
     </PropertyGroup>
 
     <ItemGroup>
