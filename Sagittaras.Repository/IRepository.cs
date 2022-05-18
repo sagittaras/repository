@@ -19,6 +19,16 @@ namespace Sagittaras.Repository
         /// Gets whether this repository has unsaved changes.
         /// </summary>
         bool HasChanges { get; }
+        
+        /// <summary>
+        /// Gets whether this repository has data in database.
+        /// </summary>
+        bool HasData { get; }
+        
+        /// <summary>
+        /// Gets whether this repository has empty table in database.
+        /// </summary>
+        bool IsEmpty { get; }
 
         /// <summary>
         /// Saves all changes made to this repository.
@@ -31,6 +41,18 @@ namespace Sagittaras.Repository
         /// </summary>
         /// <returns>How many rows was saved to the database from this repository.</returns>
         Task SaveChangesAsync();
+
+        /// <summary>
+        /// Checks if repository has data as async Task.
+        /// </summary>
+        /// <returns>True if there are data in database.</returns>
+        Task<bool> HasDataAsync();
+
+        /// <summary>
+        /// Checks if repository is empty as async task.
+        /// </summary>
+        /// <returns>True if there are no data in database.</returns>
+        Task<bool> IsEmptyAsync();
     }
 
     /// <summary>

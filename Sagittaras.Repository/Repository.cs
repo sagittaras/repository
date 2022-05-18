@@ -32,6 +32,12 @@ namespace Sagittaras.Repository
         /// <inheritdoc />
         public bool HasChanges => Operations.Count > 0;
 
+        /// <inheritdoc />
+        public abstract bool HasData { get; }
+
+        /// <inheritdoc />
+        public abstract bool IsEmpty { get; }
+
         /// <summary>
         /// Protected access to the context of database the repository is working with.
         /// </summary>
@@ -58,6 +64,12 @@ namespace Sagittaras.Repository
 
             await Context.SaveChangesAsync();
         }
+
+        /// <inheritdoc />
+        public abstract Task<bool> HasDataAsync();
+
+        /// <inheritdoc />
+        public abstract Task<bool> IsEmptyAsync();
     }
 
     /// <summary>
@@ -76,6 +88,12 @@ namespace Sagittaras.Repository
             Queryable = Table.AsQueryable();
         }
 
+        /// <inheritdoc />
+        public override bool HasData => Table.Any();
+
+        /// <inheritdoc />
+        public override bool IsEmpty => !HasData;
+
         /// <summary>
         /// Original <see cref="DbSet{TEntity}"/> for entity.
         /// </summary>
@@ -85,7 +103,19 @@ namespace Sagittaras.Repository
         /// Queryable data source of <see cref="Table"/>
         /// </summary>
         protected IQueryable<TEntity> Queryable { get; }
-        
+
+        /// <inheritdoc />
+        public override async Task<bool> HasDataAsync()
+        {
+            return await Table.AnyAsync();
+        }
+
+        /// <inheritdoc />
+        public override async Task<bool> IsEmptyAsync()
+        {
+            return !(await Table.AnyAsync());
+        }
+
         /// <inheritdoc />
         public async Task<IEnumerable<TEntity>> GetAll()
         {
