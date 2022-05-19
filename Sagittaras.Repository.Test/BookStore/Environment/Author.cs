@@ -12,14 +12,14 @@ namespace Sagittaras.Repository.Test.BookStore.Environment
     {
         [Key]
         public Guid Id { get; set; }
-        
+
         [MaxLength(128)]
         [Required]
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         [MaxLength(255)]
         [Required]
-        public string Email { get; set; }
+        public string Email { get; set; } = string.Empty;
 
         [Required]
         public DateTime Born { get; set; } = DateTime.Now;

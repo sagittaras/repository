@@ -12,10 +12,10 @@ namespace Sagittaras.Repository.Test.BookStore.Environment
     {
         [Key]
         public Guid Id { get; set; }
-        
+
         [Required]
         [MaxLength(128)]
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         public virtual ICollection<Book>? Books { get; set; }
     }
