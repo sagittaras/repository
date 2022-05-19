@@ -5,6 +5,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DB04AC05-E3E1-4879-ADE0-141FCE3BA472}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		README.md = README.md
+		LICENSE = LICENSE
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sagittaras.Repository.Test", "Sagittaras.Repository.Test\Sagittaras.Repository.Test.csproj", "{5CAC824D-1955-48B4-A253-902F41F85A6D}"
