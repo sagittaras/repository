@@ -6,13 +6,13 @@ using Sagittaras.Repository.Test.BookStore.Environment.Repository;
 
 namespace Sagittaras.Repository.Test.BookStore.Environment.SetUp
 {
-    public class BookStoreFactory : DataModelFactory
+    public class BookStoreFactory : TestFactory
     {
         protected override void OnConfiguring(ServiceCollection services)
         {
             services.AddDbContext<BookStoreContext>(contextOptions =>
             {
-                contextOptions.UseNpgsql(GetConnectionString());
+                contextOptions.UseNpgsql(GetConnectionString(Engine.DbEngine));
                 contextOptions.UseLazyLoadingProxies();
             });
             services.AddScoped<DbContext>(b => b.GetRequiredService<BookStoreContext>());

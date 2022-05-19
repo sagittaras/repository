@@ -20,6 +20,4 @@
 # Gradle cache directory
 .gradle/
 
-connectionString.txt
-nlog.config
-connectionStrings.json
+*.DotSettings.user

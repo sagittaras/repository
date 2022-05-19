@@ -2,8 +2,9 @@
 
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
-
         <IsPackable>false</IsPackable>
+        <UserSecretsId>b060e817c3af455c8f5aabd0890f7eac</UserSecretsId>
+        <Nullable>enable</Nullable>
     </PropertyGroup>
 
     <ItemGroup>
@@ -11,7 +12,7 @@
         <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="5.0.17" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
         <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.10" />
-        <PackageReference Include="Sagittaras.Model.TestFramework" Version="1.0.0-pre" />
+        <PackageReference Include="Sagittaras.Model.TestFramework" Version="1.0.0" />
         <PackageReference Include="xunit" Version="2.4.1" />
         <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -25,12 +26,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Sagittaras.Repository\Sagittaras.Repository.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <None Update="connectionString.txt">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
     </ItemGroup>
 
 </Project>
