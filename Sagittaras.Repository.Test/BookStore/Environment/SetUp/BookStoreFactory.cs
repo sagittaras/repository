@@ -22,6 +22,7 @@ namespace Sagittaras.Repository.Test.BookStore.Environment.SetUp
                 options.AddRepository<BookRepository>();
                 options.AddRepository<PublisherRepository>();
                 options.AddRepository<BookTagRepository>();
+                options.AddRepository<TagRepository>();
             });
         }
     }

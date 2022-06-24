@@ -1,4 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
+using Sagittaras.Repository.Extensions;
+using Sagittaras.Repository.Queries;
 
 namespace Sagittaras.Repository
 {
@@ -10,6 +12,7 @@ namespace Sagittaras.Repository
         internal RepositoryPatternBuilderOptions(IServiceCollection services)
         {
             Services = services;
+            Services.AddScoped<IQueryResultFactory, QueryResultFactory>();
         }
 
         /// <summary>
@@ -38,6 +41,15 @@ namespace Sagittaras.Repository
         {
             Services.AddScoped<TInterface, TImplementation>();
             Services.AddScoped<IRepository, TImplementation>(b => (TImplementation) b.GetRequiredService<TInterface>());
+        }
+
+        /// <summary>
+        /// Replaces the default Query result factory.
+        /// </summary>
+        /// <typeparam name="TFactory">Factory type</typeparam>
+        public void UseQueryResultFactory<TFactory>() where TFactory : class, IQueryResultFactory
+        {
+            Services.ReplaceService<IQueryResultFactory, TFactory>();
         }
     }
 }

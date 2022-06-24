@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Sagittaras.Repository.Queries;
+using Sagittaras.Repository.Queries.Find;
+using Sagittaras.Repository.Queries.Get;
 
 namespace Sagittaras.Repository
 {
@@ -107,6 +111,20 @@ namespace Sagittaras.Repository
         /// </summary>
         /// <param name="entities">Enumerable of netities to be removed.</param>
         void RemoveRange(IEnumerable<TEntity> entities);
+
+        /// <summary>
+        /// Prepares a single entity result set from the query object.
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        IGetQueryResult<TEntity> Get(IQuery<TEntity> query);
+
+        /// <summary>
+        /// Prepares a collection entity result set from the query object.
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        IFindQueryResult<TEntity> Find(IQuery<TEntity> query);
     }
 
     /// <summary>

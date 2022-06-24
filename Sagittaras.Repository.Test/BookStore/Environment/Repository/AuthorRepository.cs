@@ -1,12 +1,13 @@
 using System;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Sagittaras.Repository.Queries;
 
 namespace Sagittaras.Repository.Test.BookStore.Environment.Repository
 {
     public class AuthorRepository : Repository<Author, Guid>
     {
-        public AuthorRepository(DbContext dbContext) : base(dbContext)
+        public AuthorRepository(DbContext dbContext, IQueryResultFactory queryResultFactory) : base(dbContext, queryResultFactory)
         {
         }
         
