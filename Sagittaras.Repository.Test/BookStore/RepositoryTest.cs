@@ -1,8 +1,11 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using Sagittaras.Repository.Test.BookStore.Environment;
+using Sagittaras.Repository.Test.BookStore.Environment.Queries;
 using Sagittaras.Repository.Test.BookStore.Environment.Repository;
 using Sagittaras.Repository.Test.BookStore.Environment.SetUp;
 using Xunit;
@@ -14,11 +17,13 @@ namespace Sagittaras.Repository.Test.BookStore
     {
         private readonly AuthorRepository _authorRepository;
         private readonly PublisherRepository _publisherRepository;
+        private readonly TagRepository _tagRepository;
         
         public RepositoryTest(BookStoreFactory factory, ITestOutputHelper testOutputHelper) : base(factory, testOutputHelper)
         {
             _authorRepository = ServiceProvider.GetRequiredService<AuthorRepository>();
             _publisherRepository = ServiceProvider.GetRequiredService<PublisherRepository>();
+            _tagRepository = ServiceProvider.GetRequiredService<TagRepository>();
         }
 
         [Fact]
@@ -83,6 +88,20 @@ namespace Sagittaras.Repository.Test.BookStore
 
             await _publisherRepository.SaveChangesAsync();
             (await _publisherRepository.GetAll()).Should().HaveCount(2);
+        }
+
+        [Fact]
+        public async Task Test_Query()
+        {
+            Author author = await _authorRepository.Get(new GetBookwormQuery()).SingleAsync();
+            author.Name.Should().Be("Bookworm #1");
+        }
+
+        [Fact]
+        public async Task Test_CollectionQuery()
+        {
+            IEnumerable<Tag> tags = await _tagRepository.Find(new AllTagsQuery()).FindAsync();
+            tags.First().Id.Should().Be(2);
         }
     }
 }
