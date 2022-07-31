@@ -37,13 +37,27 @@ namespace Sagittaras.Repository.Queries.Get
         /// </summary>
         /// <typeparam name="TDto">Type of final object.</typeparam>
         /// <returns></returns>
-        TDto GetProjected<TDto>();
+        TDto SingleProjected<TDto>();
 
         /// <summary>
         /// Gets the single entity projected to DTO as asynchronous task.
         /// </summary>
         /// <typeparam name="TDto">Type of final object.</typeparam>
         /// <returns></returns>
-        Task<TDto> GetProjectedAsync<TDto>();
+        Task<TDto> SingleProjectedAsync<TDto>();
+
+        /// <summary>
+        /// Gets the first entity projected as DTO.
+        /// </summary>
+        /// <typeparam name="TDto"></typeparam>
+        /// <returns></returns>
+        TDto FirstProjected<TDto>();
+
+        /// <summary>
+        /// Gets the first entity projected to DTO as async task.
+        /// </summary>
+        /// <typeparam name="TDto"></typeparam>
+        /// <returns></returns>
+        Task<TDto> FirstProjectAsync<TDto>();
     }
 }

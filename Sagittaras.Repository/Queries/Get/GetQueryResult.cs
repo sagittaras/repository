@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Sagittaras.Repository.Queries.Projection;
 
 namespace Sagittaras.Repository.Queries.Get
 {
@@ -12,10 +13,12 @@ namespace Sagittaras.Repository.Queries.Get
     public class GetQueryResult<TEntity> : IGetQueryResult<TEntity> where TEntity : class
     {
         private readonly IQueryable<TEntity> _queryable;
+        private readonly IProjectionAdapter _projectionAdapter;
 
-        public GetQueryResult(IQueryable<TEntity> queryable)
+        public GetQueryResult(IQueryable<TEntity> queryable, IProjectionAdapter projectionAdapter)
         {
             _queryable = queryable;
+            _projectionAdapter = projectionAdapter;
         }
 
         /// <inheritdoc />
@@ -43,15 +46,27 @@ namespace Sagittaras.Repository.Queries.Get
         }
 
         /// <inheritdoc />
-        public TDto GetProjected<TDto>()
+        public TDto SingleProjected<TDto>()
         {
-            throw new NotSupportedException($"For DTO projection create a custom implementation of {nameof(IGetQueryResult<object>)} or extends {nameof(GetQueryResult<object>)}");
+            return _projectionAdapter.ProjectTo<TDto>(_queryable).Single();
         }
 
         /// <inheritdoc />
-        public Task<TDto> GetProjectedAsync<TDto>()
+        public async Task<TDto> SingleProjectedAsync<TDto>()
         {
-            throw new NotSupportedException($"For DTO projection create a custom implementation of {nameof(IGetQueryResult<object>)} or extends {nameof(GetQueryResult<object>)}");
+            return await _projectionAdapter.ProjectTo<TDto>(_queryable).SingleAsync();
+        }
+
+        /// <inheritdoc />
+        public TDto FirstProjected<TDto>()
+        {
+            return _projectionAdapter.ProjectTo<TDto>(_queryable).First();
+        }
+
+        /// <inheritdoc />
+        public async Task<TDto> FirstProjectAsync<TDto>()
+        {
+            return await _projectionAdapter.ProjectTo<TDto>(_queryable).FirstAsync();
         }
     }
 }

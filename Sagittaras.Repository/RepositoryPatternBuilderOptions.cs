@@ -1,6 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Sagittaras.Repository.Extensions;
 using Sagittaras.Repository.Queries;
+using Sagittaras.Repository.Queries.Projection;
 
 namespace Sagittaras.Repository
 {
@@ -13,6 +14,7 @@ namespace Sagittaras.Repository
         {
             Services = services;
             Services.AddScoped<IQueryResultFactory, QueryResultFactory>();
+            Services.AddSingleton<IProjectionAdapter, NotSupportedProjectionAdapter>();
         }
 
         /// <summary>
@@ -44,12 +46,12 @@ namespace Sagittaras.Repository
         }
 
         /// <summary>
-        /// Replaces the default Query result factory.
+        /// Use a custom implementation of the projection adapter.
         /// </summary>
-        /// <typeparam name="TFactory">Factory type</typeparam>
-        public void UseQueryResultFactory<TFactory>() where TFactory : class, IQueryResultFactory
+        /// <typeparam name="TProjectionAdapter"></typeparam>
+        public void UseProjectionAdapter<TProjectionAdapter>() where TProjectionAdapter : class, IProjectionAdapter
         {
-            Services.ReplaceService<IQueryResultFactory, TFactory>();
+            Services.ReplaceService<IProjectionAdapter, TProjectionAdapter>();
         }
     }
 }
