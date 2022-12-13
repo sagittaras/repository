@@ -87,6 +87,7 @@ namespace Sagittaras.Repository
         /// 
         /// </summary>
         /// <param name="dbContext"></param>
+        /// <param name="queryResultFactory"></param>
         protected Repository(DbContext dbContext, IQueryResultFactory queryResultFactory) : base(dbContext, typeof(TEntity))
         {
             _queryResultFactory = queryResultFactory;
@@ -162,6 +163,12 @@ namespace Sagittaras.Repository
         public void RemoveRange(IEnumerable<TEntity> entities)
         {
             Operations.Enqueue(new RemoveRangeOperation<TEntity>(Context, entities));
+        }
+
+        /// <inheritdoc />
+        public async Task<TEntity?> Get(object id)
+        {
+            return await Table.FindAsync(id).AsTask();
         }
 
         /// <inheritdoc />

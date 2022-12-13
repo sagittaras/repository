@@ -113,6 +113,13 @@ namespace Sagittaras.Repository
         void RemoveRange(IEnumerable<TEntity> entities);
 
         /// <summary>
+        /// Gets the entity by the value of it's primary key.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        Task<TEntity?> Get(object id);
+
+        /// <summary>
         /// Prepares a single entity result set from the query object.
         /// </summary>
         /// <param name="query"></param>
