@@ -1,4 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
+using Sagittaras.Repository.Extensions;
+using Sagittaras.Repository.Queries;
+using Sagittaras.Repository.Queries.Projection;
 
 namespace Sagittaras.Repository
 {
@@ -10,6 +13,8 @@ namespace Sagittaras.Repository
         internal RepositoryPatternBuilderOptions(IServiceCollection services)
         {
             Services = services;
+            Services.AddScoped<IQueryResultFactory, QueryResultFactory>();
+            Services.AddSingleton<IProjectionAdapter, NotSupportedProjectionAdapter>();
         }
 
         /// <summary>
@@ -38,6 +43,15 @@ namespace Sagittaras.Repository
         {
             Services.AddScoped<TInterface, TImplementation>();
             Services.AddScoped<IRepository, TImplementation>(b => (TImplementation) b.GetRequiredService<TInterface>());
+        }
+
+        /// <summary>
+        /// Use a custom implementation of the projection adapter.
+        /// </summary>
+        /// <typeparam name="TProjectionAdapter"></typeparam>
+        public void UseProjectionAdapter<TProjectionAdapter>() where TProjectionAdapter : class, IProjectionAdapter
+        {
+            Services.ReplaceService<IProjectionAdapter, TProjectionAdapter>();
         }
     }
 }

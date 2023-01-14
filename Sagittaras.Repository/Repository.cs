@@ -4,6 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Sagittaras.Repository.Operations;
+using Sagittaras.Repository.Queries;
+using Sagittaras.Repository.Queries.Find;
+using Sagittaras.Repository.Queries.Get;
 
 namespace Sagittaras.Repository
 {
@@ -78,12 +81,16 @@ namespace Sagittaras.Repository
     /// <typeparam name="TEntity">Target type of entity the repository is working with.</typeparam>
     public abstract class Repository<TEntity> : Repository, IRepository<TEntity> where TEntity : class
     {
+        private readonly IQueryResultFactory _queryResultFactory;
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="dbContext"></param>
-        protected Repository(DbContext dbContext) : base(dbContext, typeof(TEntity))
+        /// <param name="queryResultFactory"></param>
+        protected Repository(DbContext dbContext, IQueryResultFactory queryResultFactory) : base(dbContext, typeof(TEntity))
         {
+            _queryResultFactory = queryResultFactory;
             Table = dbContext.Set<TEntity>();
             Queryable = Table.AsQueryable();
         }
@@ -157,7 +164,25 @@ namespace Sagittaras.Repository
         {
             Operations.Enqueue(new RemoveRangeOperation<TEntity>(Context, entities));
         }
-        
+
+        /// <inheritdoc />
+        public async Task<TEntity?> Get(object id)
+        {
+            return await Table.FindAsync(id).AsTask();
+        }
+
+        /// <inheritdoc />
+        public IGetQueryResult<TEntity> Get(IQuery<TEntity> query)
+        {
+            return _queryResultFactory.CreateGetResult(query.Execute(Queryable));
+        }
+
+        /// <inheritdoc />
+        public IFindQueryResult<TEntity> Find(IQuery<TEntity> query)
+        {
+            return _queryResultFactory.CreateFindResult(query.Execute(Queryable));
+        }
+
         /// <summary>
         /// Finds a <see cref="DbSet{TEntity}"/> for the target entity type.
         /// </summary>
@@ -180,7 +205,8 @@ namespace Sagittaras.Repository
         /// 
         /// </summary>
         /// <param name="dbContext"></param>
-        protected Repository(DbContext dbContext) : base(dbContext)
+        /// <param name="queryResultFactory"></param>
+        protected Repository(DbContext dbContext, IQueryResultFactory queryResultFactory) : base(dbContext, queryResultFactory)
         {
         }
         
@@ -203,7 +229,8 @@ namespace Sagittaras.Repository
         /// 
         /// </summary>
         /// <param name="dbContext"></param>
-        protected Repository(DbContext dbContext) : base(dbContext)
+        /// <param name="queryResultFactory"></param>
+        protected Repository(DbContext dbContext, IQueryResultFactory queryResultFactory) : base(dbContext, queryResultFactory)
         {
         }
 
