@@ -7,7 +7,7 @@ namespace Sagittaras.Repository.Test.BookStore.Environment.Queries
     {
         public IQueryable<Tag> Execute(IQueryable<Tag> queryable)
         {
-            return queryable.OrderByDescending(t => t.Id);
+            return queryable.OrderBy(t => t.Id);
         }
     }
 }

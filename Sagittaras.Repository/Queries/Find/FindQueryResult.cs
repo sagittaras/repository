@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Sagittaras.Repository.Queries.Find.Pagination;
 using Sagittaras.Repository.Queries.Projection;
 
 namespace Sagittaras.Repository.Queries.Find
@@ -34,15 +35,33 @@ namespace Sagittaras.Repository.Queries.Find
         }
 
         /// <inheritdoc />
+        public async Task<PagedCollection<TEntity>> FindPagedAsync(PaginationQuery query)
+        {
+            return await _queryable.ApplyPaginationAsync(query);
+        }
+
+        /// <inheritdoc />
         public IEnumerable<TDto> FindProjected<TDto>()
         {
-            return _projectionAdapter.ProjectTo<TDto>(_queryable).ToList();
+            return _projectionAdapter
+                .ProjectTo<TDto>(_queryable)
+                .ToList();
         }
 
         /// <inheritdoc />
         public async Task<IEnumerable<TDto>> FindProjectedAsync<TDto>()
         {
-            return await _projectionAdapter.ProjectTo<TDto>(_queryable).ToListAsync();
+            return await _projectionAdapter
+                .ProjectTo<TDto>(_queryable)
+                .ToListAsync();
+        }
+
+        /// <inheritdoc />
+        public async Task<PagedCollection<TDto>> FindProjectedAndPaginatedAsync<TDto>(PaginationQuery query)
+        {
+            return await _projectionAdapter
+                .ProjectTo<TDto>(_queryable)
+                .ApplyPaginationAsync(query);
         }
     }
 }
