@@ -41,12 +41,12 @@ namespace Sagittaras.Repository.Test.BookStore.Environment.SetUp
                 new()
                 {
                     Id = 1,
-                    Name = "First"
+                    Name = "1"
                 },
                 new()
                 {
                     Id = 2,
-                    Name = "Second"
+                    Name = "2"
                 }
             });
             modelBuilder.Entity<BookTag>().HasKey(nameof(BookTag.BookId), nameof(BookTag.TagId));

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
+using Sagittaras.Repository.Queries.Find.Pagination;
 using Sagittaras.Repository.Test.BookStore.Environment;
 using Sagittaras.Repository.Test.BookStore.Environment.Queries;
 using Sagittaras.Repository.Test.BookStore.Environment.Repository;
@@ -101,7 +102,29 @@ namespace Sagittaras.Repository.Test.BookStore
         public async Task Test_CollectionQuery()
         {
             IEnumerable<Tag> tags = await _tagRepository.Find(new AllTagsQuery()).FindAsync();
-            tags.First().Id.Should().Be(2);
+            tags.First().Id.Should().Be(1);
+        }
+
+        [Fact]
+        public async Task Test_Pagination()
+        {
+            // Create ten tags - two are already prepared in the database.
+            _tagRepository.InsertRange(new List<Tag>
+            {
+                new(){Name = "3"}, new(){Name = "4"}, new(){Name = "5"}, new(){Name = "6"}, new(){Name = "7"}, new(){Name = "8"}, new(){Name = "9"}, new(){Name = "10"}
+            });
+            await _tagRepository.SaveChangesAsync();
+
+            PaginationQuery query = new() { Limit = 5, Offset = 0 };
+            PagedCollection<Tag> collection = await _tagRepository.Find(new AllTagsQuery()).FindPagedAsync(query);
+            collection.Total.Should().Be(10);
+            collection.Limit.Should().Be(collection.Limit);
+            collection.Offset.Should().Be(collection.Offset);
+            collection.Data.Should().HaveCount(collection.Limit);
+
+            query.Offset = 5;
+            collection = await _tagRepository.Find(new AllTagsQuery()).FindPagedAsync(query);
+            collection.Data.First().Name.Should().Be("6");
         }
     }
 }
