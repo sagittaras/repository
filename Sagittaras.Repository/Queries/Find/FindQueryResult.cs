@@ -2,6 +2,8 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Sagittaras.Repository.Queries.Find.Filtering;
+using Sagittaras.Repository.Queries.Find.Filtering.Extensions;
 using Sagittaras.Repository.Queries.Find.Pagination;
 using Sagittaras.Repository.Queries.Projection;
 
@@ -38,6 +40,14 @@ namespace Sagittaras.Repository.Queries.Find
         public async Task<PagedCollection<TEntity>> FindPagedAsync(PaginationQuery query)
         {
             return await _queryable.ApplyPaginationAsync(query);
+        }
+
+        /// <inheritdoc />
+        public async Task<IEnumerable<TEntity>> FindFilteredAsync(FilterQuery filterQuery)
+        {
+            return await _queryable
+                .ApplyFilter(filterQuery)
+                .ToListAsync();
         }
 
         /// <inheritdoc />

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Sagittaras.Repository.Queries.Find.Filtering;
 using Sagittaras.Repository.Queries.Find.Pagination;
 
 namespace Sagittaras.Repository.Queries.Find
@@ -24,6 +25,8 @@ namespace Sagittaras.Repository.Queries.Find
         /// <param name="query">Pagination URL query data.</param>
         /// <returns></returns>
         Task<PagedCollection<TEntity>> FindPagedAsync(PaginationQuery query);
+
+        Task<IEnumerable<TEntity>> FindFilteredAsync(FilterQuery filterQuery);
 
         /// <summary>
         /// Find the collection of selected entities projected to DTO object.
