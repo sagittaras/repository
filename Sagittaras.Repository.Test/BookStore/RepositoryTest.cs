@@ -30,7 +30,7 @@ namespace Sagittaras.Repository.Test.BookStore
         [Fact]
         public async Task Test_RepositoryBasics()
         {
-            _authorRepository.EntityType.Should().Be(typeof(Author));
+            _authorRepository.ClrType.Should().Be(typeof(Author));
             _authorRepository.HasChanges.Should().BeFalse();
             (await _authorRepository.GetAll()).Should().HaveCount(1);
             Author? byPk = await _authorRepository.Get(Guid.Parse("6e7c8428-6b49-4c94-b062-af832efd7236"));

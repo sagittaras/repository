@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Sagittaras.Repository.Queries;
 using Sagittaras.Repository.Queries.Find;
 using Sagittaras.Repository.Queries.Get;
@@ -15,9 +15,14 @@ namespace Sagittaras.Repository
     public interface IRepository
     {
         /// <summary>
-        /// The type of entity used with this repository.
+        /// EF Core entity type describing the entity used with this repository.
         /// </summary>
-        Type EntityType { get; }
+        IEntityType EntityType { get; }
+        
+        /// <summary>
+        /// The CLR type of entity used with this repository.
+        /// </summary>
+        Type ClrType { get; }
 
         /// <summary>
         /// Gets whether this repository has unsaved changes.

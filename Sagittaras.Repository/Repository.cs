@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Sagittaras.Repository.Operations;
 using Sagittaras.Repository.Queries;
 using Sagittaras.Repository.Queries.Find;
@@ -26,11 +27,15 @@ namespace Sagittaras.Repository
         protected Repository(DbContext dbContext, Type entityType)
         {
             Context = dbContext;
-            EntityType = entityType;
+            ClrType = entityType;
+            EntityType = dbContext.Model.FindEntityType(entityType);
         }
 
         /// <inheritdoc />
-        public Type EntityType { get; }
+        public IEntityType EntityType { get; }
+
+        /// <inheritdoc />
+        public Type ClrType { get; }
 
         /// <inheritdoc />
         public bool HasChanges => Operations.Count > 0;
