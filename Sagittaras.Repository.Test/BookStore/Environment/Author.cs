@@ -22,7 +22,7 @@ namespace Sagittaras.Repository.Test.BookStore.Environment
         public string Email { get; set; } = string.Empty;
 
         [Required]
-        public DateTime Born { get; set; } = DateTime.Now;
+        public DateTime Born { get; set; } = DateTime.UtcNow;
 
         public virtual ICollection<Book>? Books { get; set; }
     }
