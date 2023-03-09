@@ -13,7 +13,7 @@ namespace Sagittaras.Repository.Test
         {
             Type type = typeof(AuthorRepository);
             Type[] interfaces = type.GetInterfaces().Where(x => x.IsAssignableTo(typeof(IRepository))).ToArray();
-            interfaces.Should().HaveCount(3);
+            interfaces.Should().HaveCount(4);
         }
     }
 }

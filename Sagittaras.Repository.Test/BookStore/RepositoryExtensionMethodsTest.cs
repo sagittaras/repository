@@ -21,7 +21,7 @@ namespace Sagittaras.Repository.Test.BookStore
         [Fact]
         public void Test_GetPrimaryKey()
         {
-            AuthorRepository authorRepository = ServiceProvider.GetRequiredService<AuthorRepository>();
+            IAuthorRepository authorRepository = ServiceProvider.GetRequiredService<IAuthorRepository>();
             IProperty property = authorRepository.GetPrimaryKeyProperty();
             property.Name.Should().Be(nameof(Author.Id));
         }
