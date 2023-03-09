@@ -18,7 +18,7 @@ namespace Sagittaras.Repository.Test.BookStore.Environment.SetUp
             services.AddScoped<DbContext>(b => b.GetRequiredService<BookStoreContext>());
             services.UseRepositoryPattern(options =>
             {
-                options.AddRepository<AuthorRepository>();
+                options.AddRepository<IAuthorRepository, AuthorRepository>();
                 options.AddRepository<BookRepository>();
                 options.AddRepository<PublisherRepository>();
                 options.AddRepository<BookTagRepository>();

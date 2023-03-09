@@ -44,7 +44,7 @@ namespace Sagittaras.Repository
             where TImplementation : class, TInterface
         {
             Services.AddScoped<TInterface, TImplementation>();
-            RegisterAlternateWays(typeof(TImplementation));
+            RegisterAlternateWays(typeof(TImplementation), typeof(TInterface));
         }
 
         /// <summary>
@@ -66,11 +66,18 @@ namespace Sagittaras.Repository
         /// - Custom repository interface
         /// </remarks>
         /// <param name="implementationType"></param>
-        private void RegisterAlternateWays(Type implementationType)
+        /// <param name="callType"></param>
+        private void RegisterAlternateWays(Type implementationType, Type? callType = null)
         {
             foreach (Type repositoryInterface in implementationType.GetInterfaces().Where(x => x.IsAssignableTo(typeof(IRepository))))
             {
-                Services.AddScoped(repositoryInterface, b => b.GetRequiredService(implementationType));
+                // I.e. If repository is registered as IAuthorRepository, we don't want register this interface again. Neverending loop.
+                if (repositoryInterface == callType)
+                {
+                    continue;
+                }
+                
+                Services.AddScoped(repositoryInterface, b => b.GetRequiredService(callType ?? implementationType));
             }
         }
     }

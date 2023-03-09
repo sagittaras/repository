@@ -16,25 +16,38 @@ namespace Sagittaras.Repository.Test.BookStore
 {
     public class RepositoryTest : BookStoreTest
     {
-        private readonly AuthorRepository _authorRepository;
+        private readonly IAuthorRepository _authorRepository;
         private readonly PublisherRepository _publisherRepository;
         private readonly TagRepository _tagRepository;
         
         public RepositoryTest(BookStoreFactory factory, ITestOutputHelper testOutputHelper) : base(factory, testOutputHelper)
         {
-            _authorRepository = ServiceProvider.GetRequiredService<AuthorRepository>();
+            _authorRepository = ServiceProvider.GetRequiredService<IAuthorRepository>();
             _publisherRepository = ServiceProvider.GetRequiredService<PublisherRepository>();
             _tagRepository = ServiceProvider.GetRequiredService<TagRepository>();
         }
 
         [Fact]
-        public void Test_RegisteredTypes()
+        public void Test_RegisteredTypes_FromInterface()
         {
             IRepository<Author> byEntity = ServiceProvider.GetRequiredService<IRepository<Author>>();
             byEntity.Should().BeOfType<AuthorRepository>();
             
             IRepository<Author, Guid> byEntityAndKey = ServiceProvider.GetRequiredService<IRepository<Author, Guid>>();
             byEntityAndKey.Should().BeOfType<AuthorRepository>();
+        }
+
+        [Fact]
+        public void Test_RegisteredTypes()
+        {
+            IRepository<Book> byEntity = ServiceProvider.GetRequiredService<IRepository<Book>>();
+            byEntity.Should().BeOfType<BookRepository>();
+            
+            IRepository<Book, Guid> byEntityAndKey = ServiceProvider.GetRequiredService<IRepository<Book, Guid>>();
+            byEntityAndKey.Should().BeOfType<BookRepository>();
+            
+            BookRepository byConcrete = ServiceProvider.GetRequiredService<BookRepository>();
+            byConcrete.Should().BeOfType<BookRepository>();
         }
 
         [Fact]
