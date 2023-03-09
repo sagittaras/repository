@@ -28,6 +28,16 @@ namespace Sagittaras.Repository.Test.BookStore
         }
 
         [Fact]
+        public void Test_RegisteredTypes()
+        {
+            IRepository<Author> byEntity = ServiceProvider.GetRequiredService<IRepository<Author>>();
+            byEntity.Should().BeOfType<AuthorRepository>();
+            
+            IRepository<Author, Guid> byEntityAndKey = ServiceProvider.GetRequiredService<IRepository<Author, Guid>>();
+            byEntityAndKey.Should().BeOfType<AuthorRepository>();
+        }
+
+        [Fact]
         public async Task Test_RepositoryBasics()
         {
             _authorRepository.ClrType.Should().Be(typeof(Author));

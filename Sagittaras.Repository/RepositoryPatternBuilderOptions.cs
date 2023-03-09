@@ -1,3 +1,5 @@
+using System;
+using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
 using Sagittaras.Repository.Extensions;
 using Sagittaras.Repository.Queries;
@@ -29,7 +31,7 @@ namespace Sagittaras.Repository
         public void AddRepository<TImplementation>() where TImplementation : class, IRepository
         {
             Services.AddScoped<TImplementation>();
-            Services.AddScoped<IRepository, TImplementation>(b => b.GetRequiredService<TImplementation>());
+            RegisterAlternateWays(typeof(TImplementation));
         }
 
         /// <summary>
@@ -42,7 +44,7 @@ namespace Sagittaras.Repository
             where TImplementation : class, TInterface
         {
             Services.AddScoped<TInterface, TImplementation>();
-            Services.AddScoped<IRepository, TImplementation>(b => (TImplementation) b.GetRequiredService<TInterface>());
+            RegisterAlternateWays(typeof(TImplementation));
         }
 
         /// <summary>
@@ -52,6 +54,24 @@ namespace Sagittaras.Repository
         public void UseProjectionAdapter<TProjectionAdapter>() where TProjectionAdapter : class, IProjectionAdapter
         {
             Services.ReplaceService<IProjectionAdapter, TProjectionAdapter>();
+        }
+
+        /// <summary>
+        /// Register all alternate ways how we can have repository accessible.
+        /// </summary>
+        /// <remarks>
+        /// Repository can by accessible under these ways:
+        /// - IRepository&lt;TEntity&gt;
+        /// - IRepository&lt;TEntity, TKey&gt;
+        /// - Custom repository interface
+        /// </remarks>
+        /// <param name="implementationType"></param>
+        private void RegisterAlternateWays(Type implementationType)
+        {
+            foreach (Type repositoryInterface in implementationType.GetInterfaces().Where(x => x.IsAssignableTo(typeof(IRepository))))
+            {
+                Services.AddScoped(repositoryInterface, b => b.GetRequiredService(implementationType));
+            }
         }
     }
 }
