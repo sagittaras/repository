@@ -9,6 +9,11 @@ namespace Sagittaras.Repository.Test.Mapping.Environment.SetUp
 {
     public class MappingFactory : TestFactory
     {
+        /// <summary>
+        /// Overrides the name of connection string to match the requirements in our pipeline.
+        /// </summary>
+        protected override string ConnectionString => "Default";
+
         protected override void OnConfiguring(ServiceCollection services)
         {
             services.AddDbContext<MappingContext>(contextOptions =>
