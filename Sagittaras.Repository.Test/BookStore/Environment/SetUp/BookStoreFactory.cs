@@ -8,6 +8,11 @@ namespace Sagittaras.Repository.Test.BookStore.Environment.SetUp
 {
     public class BookStoreFactory : TestFactory
     {
+        /// <summary>
+        /// Overrides the default connection string name to match our pipeline needs.
+        /// </summary>
+        protected override string ConnectionString => "Default";
+
         protected override void OnConfiguring(ServiceCollection services)
         {
             services.AddDbContext<BookStoreContext>(contextOptions =>
