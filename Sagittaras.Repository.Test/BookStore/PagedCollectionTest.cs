@@ -24,6 +24,7 @@ namespace Sagittaras.Repository.Test.BookStore
                 }
             };
             collection.Should().BeAssignableTo<IPagedCollection>();
+            collection.Should().BeAssignableTo<IPagedCollection<Author>>();
             
             // ReSharper disable once ConvertTypeCheckToNullCheck
             bool isPagedCollection = collection is IPagedCollection;

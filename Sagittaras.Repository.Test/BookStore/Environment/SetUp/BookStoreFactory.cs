@@ -19,6 +19,8 @@ namespace Sagittaras.Repository.Test.BookStore.Environment.SetUp
             {
                 contextOptions.UseNpgsql(GetConnectionString(Engine.DbEngine));
                 contextOptions.UseLazyLoadingProxies();
+                contextOptions.EnableDetailedErrors();
+                contextOptions.EnableSensitiveDataLogging();
             });
             services.AddScoped<DbContext>(b => b.GetRequiredService<BookStoreContext>());
             services.UseRepositoryPattern(options =>
