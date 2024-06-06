@@ -2,6 +2,9 @@
 
 namespace Sagittaras.Repository.Queries.Find.Pagination;
 
+/// <summary>
+///     Interface for a collection describing the result of a paginated query.
+/// </summary>
 public interface IPagedCollection : IReadOnlyCollection<object>
 {
     /// <summary>
@@ -18,4 +21,16 @@ public interface IPagedCollection : IReadOnlyCollection<object>
     /// How many items are skipped from the beginning of the dataset.
     /// </summary>
     int Offset { get; set; }
+}
+
+/// <summary>
+///     Generic interface for a collection describing the result of a paginated query.
+/// </summary>
+/// <typeparam name="TData"></typeparam>
+public interface IPagedCollection<TData> : IPagedCollection
+{
+    /// <summary>
+    ///     Collection of data in the current page.
+    /// </summary>
+    ICollection<TData> Data { get; set; }
 }

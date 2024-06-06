@@ -4,10 +4,10 @@ using System.Collections.Generic;
 namespace Sagittaras.Repository.Queries.Find.Pagination;
 
 /// <summary>
-/// Collection describing the result of a paginated query.
+///     Collection describing the result of a paginated query.
 /// </summary>
 /// <typeparam name="TData">Type of data in collection.</typeparam>
-public class PagedCollection<TData> : IPagedCollection
+public class PagedCollection<TData> : IPagedCollection<TData>
 {
     /// <inheritdoc />
     public int Total { get; set; }
@@ -17,10 +17,8 @@ public class PagedCollection<TData> : IPagedCollection
 
     /// <inheritdoc />
     public int Offset { get; set; }
-        
-    /// <summary>
-    /// Enumerable of data in the current page.
-    /// </summary>
+    
+    /// <inheritdoc />
     public ICollection<TData> Data { get; set; } = new List<TData>();
         
     /// <inheritdoc />
