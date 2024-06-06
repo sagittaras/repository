@@ -23,13 +23,13 @@ namespace Sagittaras.Repository.Queries.Find
         }
 
         /// <inheritdoc />
-        public IEnumerable<TEntity> Find()
+        public ICollection<TEntity> Find()
         {
             return _queryable.ToList();
         }
 
         /// <inheritdoc />
-        public async Task<IEnumerable<TEntity>> FindAsync()
+        public async Task<ICollection<TEntity>> FindAsync()
         {
             return await _queryable.ToListAsync();
         }
@@ -41,7 +41,7 @@ namespace Sagittaras.Repository.Queries.Find
         }
 
         /// <inheritdoc />
-        public IEnumerable<TDto> FindProjected<TDto>()
+        public ICollection<TDto> FindProjected<TDto>()
         {
             return _projectionAdapter
                 .ProjectTo<TDto>(_queryable)
@@ -49,7 +49,7 @@ namespace Sagittaras.Repository.Queries.Find
         }
 
         /// <inheritdoc />
-        public async Task<IEnumerable<TDto>> FindProjectedAsync<TDto>()
+        public async Task<ICollection<TDto>> FindProjectedAsync<TDto>()
         {
             return await _projectionAdapter
                 .ProjectTo<TDto>(_queryable)

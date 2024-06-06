@@ -10,13 +10,13 @@ namespace Sagittaras.Repository.Queries.Find
         /// Find the collection of selected entities.
         /// </summary>
         /// <returns></returns>
-        IEnumerable<TEntity> Find();
+        ICollection<TEntity> Find();
 
         /// <summary>
         /// Find the collection of selected entities asynchronously.
         /// </summary>
         /// <returns></returns>
-        Task<IEnumerable<TEntity>> FindAsync();
+        Task<ICollection<TEntity>> FindAsync();
         
         /// <summary>
         /// Find the collection of selected entities with pagination.
@@ -30,14 +30,14 @@ namespace Sagittaras.Repository.Queries.Find
         /// </summary>
         /// <typeparam name="TDto"></typeparam>
         /// <returns></returns>
-        IEnumerable<TDto> FindProjected<TDto>();
+        ICollection<TDto> FindProjected<TDto>();
 
         /// <summary>
         /// Find the collection of selected entities projected to DTO object asynchronously.
         /// </summary>
         /// <typeparam name="TDto"></typeparam>
         /// <returns></returns>
-        Task<IEnumerable<TDto>> FindProjectedAsync<TDto>();
+        Task<ICollection<TDto>> FindProjectedAsync<TDto>();
         
         /// <summary>
         /// Find the collection of selected entities projected to DTO object with pagination.
