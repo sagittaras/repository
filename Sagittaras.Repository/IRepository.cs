@@ -120,9 +120,9 @@ namespace Sagittaras.Repository
         /// <summary>
         /// Gets the entity by the value of it's primary key.
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="keyValues"></param>
         /// <returns></returns>
-        Task<TEntity?> Get(object id);
+        Task<TEntity?> Get(params object?[]? keyValues);
 
         /// <summary>
         /// Prepares a single entity result set from the query object.

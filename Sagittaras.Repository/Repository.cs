@@ -28,7 +28,7 @@ namespace Sagittaras.Repository
         {
             Context = dbContext;
             ClrType = entityType;
-            EntityType = dbContext.Model.FindEntityType(entityType);
+            EntityType = dbContext.Model.FindEntityType(entityType) ?? throw new ArgumentException("Entity type not found in the context.");
         }
 
         /// <inheritdoc />
@@ -59,7 +59,7 @@ namespace Sagittaras.Repository
         /// <inheritdoc />
         public void SaveChanges()
         {
-            SaveChangesAsync().Wait();
+            SaveChangesAsync().GetAwaiter().GetResult();
         }
 
         /// <inheritdoc />
@@ -125,7 +125,7 @@ namespace Sagittaras.Repository
         /// <inheritdoc />
         public override async Task<bool> IsEmptyAsync()
         {
-            return !(await Table.AnyAsync());
+            return !await Table.AnyAsync();
         }
 
         /// <inheritdoc />
@@ -171,9 +171,9 @@ namespace Sagittaras.Repository
         }
 
         /// <inheritdoc />
-        public async Task<TEntity?> Get(object id)
+        public async Task<TEntity?> Get(params object?[]? keyValues)
         {
-            return await Table.FindAsync(id).AsTask();
+            return await Table.FindAsync(keyValues).AsTask();
         }
 
         /// <inheritdoc />
