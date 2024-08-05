@@ -78,8 +78,8 @@ namespace Sagittaras.Repository
         /// <summary>
         /// Gets all entities in this repository.
         /// </summary>
-        /// <returns>An enumerable of all entites.</returns>
-        Task<IEnumerable<TEntity>> GetAll();
+        /// <returns>Collection of all entites.</returns>
+        Task<ICollection<TEntity>> GetAllAsync();
 
         /// <summary>
         /// Inserts a new record to the repository.

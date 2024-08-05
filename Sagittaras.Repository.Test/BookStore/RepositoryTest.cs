@@ -55,7 +55,7 @@ namespace Sagittaras.Repository.Test.BookStore
         {
             _authorRepository.ClrType.Should().Be(typeof(Author));
             _authorRepository.HasChanges.Should().BeFalse();
-            (await _authorRepository.GetAll()).Should().HaveCount(1);
+            (await _authorRepository.GetAllAsync()).Should().HaveCount(1);
             Author? byPk = await _authorRepository.Get(Guid.Parse("6e7c8428-6b49-4c94-b062-af832efd7236"));
             byPk.Should().NotBeNull();
         }
@@ -107,11 +107,11 @@ namespace Sagittaras.Repository.Test.BookStore
             _publisherRepository.Insert(publisher);
             await _authorRepository.SaveChangesAsync();
 
-            (await _authorRepository.GetAll()).Should().HaveCount(2);
-            (await _publisherRepository.GetAll()).Should().HaveCount(1);
+            (await _authorRepository.GetAllAsync()).Should().HaveCount(2);
+            (await _publisherRepository.GetAllAsync()).Should().HaveCount(1);
 
             await _publisherRepository.SaveChangesAsync();
-            (await _publisherRepository.GetAll()).Should().HaveCount(2);
+            (await _publisherRepository.GetAllAsync()).Should().HaveCount(2);
         }
 
         [Fact]

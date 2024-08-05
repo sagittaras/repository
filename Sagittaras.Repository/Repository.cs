@@ -129,7 +129,7 @@ namespace Sagittaras.Repository
         }
 
         /// <inheritdoc />
-        public async Task<IEnumerable<TEntity>> GetAll()
+        public async Task<ICollection<TEntity>> GetAllAsync()
         {
             return await Queryable.ToListAsync();
         }
@@ -214,7 +214,7 @@ namespace Sagittaras.Repository
         protected Repository(DbContext dbContext, IQueryResultFactory queryResultFactory) : base(dbContext, queryResultFactory)
         {
         }
-        
+
         /// <inheritdoc />
         public async Task<TEntity?> Get(TKey id)
         {
