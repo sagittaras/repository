@@ -137,6 +137,17 @@ namespace Sagittaras.Repository
         /// <param name="query"></param>
         /// <returns></returns>
         IFindQueryResult<TEntity> Find(IQuery<TEntity> query);
+
+        /// <summary>
+        ///     Prepares a general query result.
+        /// </summary>
+        /// <remarks>
+        ///     The method is suitable to create a general query result that is only checking if the query's conditions are met
+        ///     or count the number of elements.
+        /// </remarks>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        IQueryResult<TEntity> Query(IQuery<TEntity> query);
     }
 
     /// <summary>

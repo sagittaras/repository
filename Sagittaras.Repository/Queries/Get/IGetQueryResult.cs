@@ -6,7 +6,7 @@ namespace Sagittaras.Repository.Queries.Get
     /// Represents a prepared resultset for a Get Query.
     /// </summary>
     /// <typeparam name="TEntity">Type of used query.</typeparam>
-    public interface IGetQueryResult<TEntity> where TEntity : class
+    public interface IGetQueryResult<TEntity> : IQueryResult<TEntity> where TEntity : class
     {
         /// <summary>
         /// Gets the single entity.

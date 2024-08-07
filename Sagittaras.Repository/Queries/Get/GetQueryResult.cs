@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Sagittaras.Repository.Queries.Projection;
@@ -10,12 +9,12 @@ namespace Sagittaras.Repository.Queries.Get
     /// Default implementation of the Query result.
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
-    public class GetQueryResult<TEntity> : IGetQueryResult<TEntity> where TEntity : class
+    public class GetQueryResult<TEntity> : QueryResult<TEntity>, IGetQueryResult<TEntity> where TEntity : class
     {
         private readonly IQueryable<TEntity> _queryable;
         private readonly IProjectionAdapter _projectionAdapter;
 
-        public GetQueryResult(IQueryable<TEntity> queryable, IProjectionAdapter projectionAdapter)
+        public GetQueryResult(IQueryable<TEntity> queryable, IProjectionAdapter projectionAdapter) : base(queryable)
         {
             _queryable = queryable;
             _projectionAdapter = projectionAdapter;

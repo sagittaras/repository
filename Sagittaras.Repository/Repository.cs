@@ -188,6 +188,12 @@ namespace Sagittaras.Repository
             return _queryResultFactory.CreateFindResult(query.Execute(Queryable));
         }
 
+        /// <inheritdoc />
+        public IQueryResult<TEntity> Query(IQuery<TEntity> query)
+        {
+            return _queryResultFactory.CreateQueryResult(query.Execute(Queryable));
+        }
+
         /// <summary>
         /// Finds a <see cref="DbSet{TEntity}"/> for the target entity type.
         /// </summary>

@@ -16,7 +16,7 @@ namespace Sagittaras.Repository.Queries
         {
             _projectionAdapter = projectionAdapter;
         }
-        
+
         /// <inheritdoc />
         public IGetQueryResult<TEntity> CreateGetResult<TEntity>(IQueryable<TEntity> queryable) where TEntity : class
         {
@@ -27,6 +27,11 @@ namespace Sagittaras.Repository.Queries
         public IFindQueryResult<TEntity> CreateFindResult<TEntity>(IQueryable<TEntity> queryable) where TEntity : class
         {
             return new FindQueryResult<TEntity>(queryable, _projectionAdapter);
+        }
+
+        public IQueryResult<TEntity> CreateQueryResult<TEntity>(IQueryable<TEntity> queryable) where TEntity : class
+        {
+            return new QueryResult<TEntity>(queryable);
         }
     }
 }

@@ -4,7 +4,7 @@ using Sagittaras.Repository.Queries.Find.Pagination;
 
 namespace Sagittaras.Repository.Queries.Find
 {
-    public interface IFindQueryResult<TEntity> where TEntity : class
+    public interface IFindQueryResult<TEntity> : IQueryResult<TEntity> where TEntity : class
     {
         /// <summary>
         /// Find the collection of selected entities.
