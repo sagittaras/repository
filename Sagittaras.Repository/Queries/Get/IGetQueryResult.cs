@@ -58,6 +58,6 @@ namespace Sagittaras.Repository.Queries.Get
         /// </summary>
         /// <typeparam name="TDto"></typeparam>
         /// <returns></returns>
-        Task<TDto> FirstProjectAsync<TDto>();
+        Task<TDto> FirstProjectedAsync<TDto>();
     }
 }

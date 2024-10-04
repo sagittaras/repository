@@ -122,6 +122,13 @@ namespace Sagittaras.Repository.Test.BookStore
         }
 
         [Fact]
+        public async Task Test_CompiledQuery()
+        {
+            Publisher publisher = await _publisherRepository.Get(new GetPublisherByIdCompiledQuery(Guid.Parse("5c3b1977-4722-4b3d-9bfb-aeedfd906029"))).SingleAsync();
+            publisher.Name.Should().Be("First Publishing Co.");
+        }
+
+        [Fact]
         public async Task Test_CollectionQuery()
         {
             IEnumerable<Tag> tags = await _tagRepository.Find(new AllTagsQuery()).FindAsync();

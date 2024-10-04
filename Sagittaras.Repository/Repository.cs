@@ -183,6 +183,12 @@ namespace Sagittaras.Repository
         }
 
         /// <inheritdoc />
+        public IGetQueryResult<TEntity> Get(ICompiledQuery<TEntity> query)
+        {
+            return _queryResultFactory.CreateGetResult(query.ToAsyncEnumerable(Context));
+        }
+
+        /// <inheritdoc />
         public IFindQueryResult<TEntity> Find(IQuery<TEntity> query)
         {
             return _queryResultFactory.CreateFindResult(query.Execute(Queryable));

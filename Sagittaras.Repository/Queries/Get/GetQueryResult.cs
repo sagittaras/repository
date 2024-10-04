@@ -63,7 +63,7 @@ namespace Sagittaras.Repository.Queries.Get
         }
 
         /// <inheritdoc />
-        public async Task<TDto> FirstProjectAsync<TDto>()
+        public async Task<TDto> FirstProjectedAsync<TDto>()
         {
             return await _projectionAdapter.ProjectTo<TDto>(_queryable).FirstAsync();
         }

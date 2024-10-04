@@ -132,6 +132,13 @@ namespace Sagittaras.Repository
         IGetQueryResult<TEntity> Get(IQuery<TEntity> query);
 
         /// <summary>
+        ///     Executes a compiled query against the repository and returns the result.
+        /// </summary>
+        /// <param name="query">The compiled query to execute.</param>
+        /// <returns>The result of the executed query.</returns>
+        IGetQueryResult<TEntity> Get(ICompiledQuery<TEntity> query);
+
+        /// <summary>
         /// Prepares a collection entity result set from the query object.
         /// </summary>
         /// <param name="query"></param>

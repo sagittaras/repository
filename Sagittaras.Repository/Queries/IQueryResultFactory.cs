@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Sagittaras.Repository.Queries.Find;
 using Sagittaras.Repository.Queries.Get;
 
@@ -10,9 +11,12 @@ namespace Sagittaras.Repository.Queries
     public interface IQueryResultFactory
     {
         IGetQueryResult<TEntity> CreateGetResult<TEntity>(IQueryable<TEntity> queryable) where TEntity : class;
+        IGetQueryResult<TEntity> CreateGetResult<TEntity>(IAsyncEnumerable<TEntity> asyncEnumerable) where TEntity : class;
 
         IFindQueryResult<TEntity> CreateFindResult<TEntity>(IQueryable<TEntity> queryable) where TEntity : class;
+        IFindQueryResult<TEntity> CreateFindResult<TEntity>(IAsyncEnumerable<TEntity> asyncEnumerable) where TEntity : class;
 
         IQueryResult<TEntity> CreateQueryResult<TEntity>(IQueryable<TEntity> queryable) where TEntity : class;
+        IQueryResult<TEntity> CreateQueryResult<TEntity>(IAsyncEnumerable<TEntity> asyncEnumerable) where TEntity : class;
     }
 }
