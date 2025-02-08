@@ -80,7 +80,7 @@ namespace Sagittaras.Repository.Test.BookStore
             await _authorRepository.SaveChangesAsync();
             Author? wasChanged = await _authorRepository.Get(author.Id);
             wasChanged.Should().NotBeNull();
-            wasChanged!.Name.Should().Be("CRUD Updated");
+            wasChanged.Name.Should().Be("CRUD Updated");
             
             _authorRepository.Remove(author);
             await _authorRepository.SaveChangesAsync();

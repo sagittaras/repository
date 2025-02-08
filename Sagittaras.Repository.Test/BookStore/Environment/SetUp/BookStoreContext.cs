@@ -4,12 +4,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Sagittaras.Repository.Test.BookStore.Environment.SetUp
 {
-    public class BookStoreContext : DbContext
+    public class BookStoreContext(DbContextOptions options) : DbContext(options)
     {
-        public BookStoreContext(DbContextOptions options) : base(options)
-        {
-        }
-        
         public DbSet<Author> Authors { get; set; } = null!;
         public DbSet<Publisher> Publishers { get; set; } = null!;
         public DbSet<Book> Books { get; set; } = null!;

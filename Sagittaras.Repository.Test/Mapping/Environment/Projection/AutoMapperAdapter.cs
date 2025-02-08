@@ -5,18 +5,16 @@ using Sagittaras.Repository.Queries.Projection;
 
 namespace Sagittaras.Repository.Test.Mapping.Environment.Projection
 {
-    public class AutoMapperAdapter : IProjectionAdapter
+    /// <summary>
+    ///     Adapter class that integrates AutoMapper support for queryable projections
+    ///     and implements the IProjectionAdapter interface.
+    /// </summary>
+    public class AutoMapperAdapter(IMapper mapper) : IProjectionAdapter
     {
-        private readonly IMapper _mapper;
-
-        public AutoMapperAdapter(IMapper mapper)
-        {
-            _mapper = mapper;
-        }
-        
+        /// <inheritdoc />
         public IQueryable<TDestination> ProjectTo<TDestination>(IQueryable queryable)
         {
-            return queryable.ProjectTo<TDestination>(_mapper.ConfigurationProvider);
+            return queryable.ProjectTo<TDestination>(mapper.ConfigurationProvider);
         }
     }
 }

@@ -12,12 +12,8 @@ using Xunit.Abstractions;
 
 namespace Sagittaras.Repository.Test.BookStore
 {
-    public class RepositoryExtensionMethodsTest : BookStoreTest
+    public class RepositoryExtensionMethodsTest(BookStoreFactory factory, ITestOutputHelper testOutputHelper) : BookStoreTest(factory, testOutputHelper)
     {
-        public RepositoryExtensionMethodsTest(BookStoreFactory factory, ITestOutputHelper testOutputHelper) : base(factory, testOutputHelper)
-        {
-        }
-
         [Fact]
         public void Test_GetPrimaryKey()
         {

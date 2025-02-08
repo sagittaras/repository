@@ -4,10 +4,5 @@ using Sagittaras.Repository.Queries;
 
 namespace Sagittaras.Repository.Test.BookStore.Environment.Repository
 {
-    public class BookTagRepository : Repository<BookTag, Guid, int>
-    {
-        public BookTagRepository(DbContext dbContext, IQueryResultFactory queryResultFactory) : base(dbContext, queryResultFactory)
-        {
-        }
-    }
+    public class BookTagRepository(DbContext dbContext, IQueryResultFactory queryResultFactory) : Repository<BookTag, Guid, int>(dbContext, queryResultFactory);
 }
