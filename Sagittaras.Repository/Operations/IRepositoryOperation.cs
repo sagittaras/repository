@@ -1,14 +1,12 @@
-namespace Sagittaras.Repository.Operations
-{
+namespace Sagittaras.Repository.Operations;
 
+/// <summary>
+///     Represents a postponed operation which should be applied when the repository is saving its changes.
+/// </summary>
+public interface IRepositoryOperation
+{
     /// <summary>
-    /// Represents an postponed operation which whould be applied when the repository is saving its changes.
+    ///     Apply the changes made by this operation.
     /// </summary>
-    public interface IRepositoryOperation
-    {
-        /// <summary>
-        /// Apply the changes made by this operation.
-        /// </summary>
-        void Apply();
-    }
+    void Apply();
 }

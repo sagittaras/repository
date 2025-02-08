@@ -12,36 +12,30 @@ namespace Sagittaras.Repository.Queries;
 ///     that are expected by the queryable.
 /// </remarks>
 /// <typeparam name="TEntity"></typeparam>
-public class QueryResult<TEntity> : IQueryResult<TEntity> where TEntity : class
+public class QueryResult<TEntity>(IQueryable<TEntity> queryable) : IQueryResult<TEntity>
+    where TEntity : class
 {
-    private readonly IQueryable<TEntity> _queryable;
-
-    public QueryResult(IQueryable<TEntity> queryable)
-    {
-        _queryable = queryable;
-    }
-
     /// <inheritdoc />
     public bool Any()
     {
-        return _queryable.Any();
+        return queryable.Any();
     }
 
     /// <inheritdoc />
     public Task<bool> AnyAsync()
     {
-        return _queryable.AnyAsync();
+        return queryable.AnyAsync();
     }
 
     /// <inheritdoc />
     public int Count()
     {
-        return _queryable.Count();
+        return queryable.Count();
     }
 
     /// <inheritdoc />
     public Task<int> CountAsync()
     {
-        return _queryable.CountAsync();
+        return queryable.CountAsync();
     }
 }
