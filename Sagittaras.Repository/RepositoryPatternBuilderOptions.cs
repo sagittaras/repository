@@ -71,7 +71,7 @@ namespace Sagittaras.Repository
         {
             foreach (Type repositoryInterface in implementationType.GetInterfaces().Where(x => x.IsAssignableTo(typeof(IRepository))))
             {
-                // I.e. If repository is registered as IAuthorRepository, we don't want register this interface again. Neverending loop.
+                // I.e. If repository is registered as IAuthorRepository, we don't want register this interface again. Never-ending loop.
                 if (repositoryInterface == callType)
                 {
                     continue;

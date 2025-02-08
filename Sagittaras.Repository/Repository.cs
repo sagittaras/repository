@@ -210,17 +210,9 @@ namespace Sagittaras.Repository
     /// </summary>
     /// <typeparam name="TEntity">The type of entity.</typeparam>
     /// <typeparam name="TKey">The type of primary key of entity.</typeparam>
-    public abstract class Repository<TEntity, TKey> : Repository<TEntity>, IRepository<TEntity, TKey> where TEntity : class
+    public abstract class Repository<TEntity, TKey>(DbContext dbContext, IQueryResultFactory queryResultFactory) : Repository<TEntity>(dbContext, queryResultFactory), IRepository<TEntity, TKey> 
+        where TEntity : class
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dbContext"></param>
-        /// <param name="queryResultFactory"></param>
-        protected Repository(DbContext dbContext, IQueryResultFactory queryResultFactory) : base(dbContext, queryResultFactory)
-        {
-        }
-
         /// <inheritdoc />
         public async Task<TEntity?> Get(TKey id)
         {
@@ -234,17 +226,8 @@ namespace Sagittaras.Repository
     /// <typeparam name="TEntity">Data type of used entity</typeparam>
     /// <typeparam name="TFirstKey">Data type of first part of PK</typeparam>
     /// <typeparam name="TSecondKey">Data type of second part of PK</typeparam>
-    public abstract class Repository<TEntity, TFirstKey, TSecondKey> : Repository<TEntity, TFirstKey>, IRepository<TEntity, TFirstKey, TSecondKey> where TEntity : class
+    public abstract class Repository<TEntity, TFirstKey, TSecondKey>(DbContext dbContext, IQueryResultFactory queryResultFactory) : Repository<TEntity, TFirstKey>(dbContext, queryResultFactory), IRepository<TEntity, TFirstKey, TSecondKey> where TEntity : class
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dbContext"></param>
-        /// <param name="queryResultFactory"></param>
-        protected Repository(DbContext dbContext, IQueryResultFactory queryResultFactory) : base(dbContext, queryResultFactory)
-        {
-        }
-
         /// <inheritdoc />
         public async Task<TEntity?> Get(TFirstKey firstKey, TSecondKey secondKey)
         {

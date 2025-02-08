@@ -10,7 +10,7 @@ using Sagittaras.Repository.Queries.Get;
 namespace Sagittaras.Repository
 {
     /// <summary>
-    /// Basic non-geric repository definition.
+    /// Basic non-generic repository definition.
     /// </summary>
     public interface IRepository
     {
@@ -78,7 +78,7 @@ namespace Sagittaras.Repository
         /// <summary>
         /// Gets all entities in this repository.
         /// </summary>
-        /// <returns>Collection of all entites.</returns>
+        /// <returns>Collection of all entities.</returns>
         Task<ICollection<TEntity>> GetAllAsync();
 
         /// <summary>
@@ -88,7 +88,7 @@ namespace Sagittaras.Repository
         void Insert(TEntity entity);
 
         /// <summary>
-        /// Inserts a new range of entites to the repisitory.
+        /// Inserts a new range of entities to the repository.
         /// </summary>
         /// <param name="entities">Enumerable of entities to be saved.</param>
         void InsertRange(IEnumerable<TEntity> entities);
@@ -100,7 +100,7 @@ namespace Sagittaras.Repository
         void Update(TEntity entity);
 
         /// <summary>
-        /// Updates a range of entites.
+        /// Updates a range of entities.
         /// </summary>
         /// <param name="entities">Enumerable of entities to be updated.</param>
         void UpdateRange(IEnumerable<TEntity> entities);
@@ -114,7 +114,7 @@ namespace Sagittaras.Repository
         /// <summary>
         /// Removes a range of entities from repository.
         /// </summary>
-        /// <param name="entities">Enumerable of netities to be removed.</param>
+        /// <param name="entities">Enumerable of entities to be removed.</param>
         void RemoveRange(IEnumerable<TEntity> entities);
 
         /// <summary>
@@ -151,7 +151,7 @@ namespace Sagittaras.Repository
     }
 
     /// <summary>
-    /// Generic repository expanding posibilities of query by the generic type of primary key.
+    /// Generic repository expanding possibilities of query by the generic type of primary key.
     /// </summary>
     /// <typeparam name="TEntity">The datatype of saved entity.</typeparam>
     /// <typeparam name="TKey">The datatype of primary key on entity.</typeparam>
