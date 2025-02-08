@@ -5,29 +5,28 @@ using Sagittaras.Repository.Extensions;
 using Sagittaras.Repository.Tests.Projection.AutoMapper.Environment.Projection;
 using Sagittaras.Repository.Tests.Projection.AutoMapper.Environment.Repository;
 
-namespace Sagittaras.Repository.Tests.Projection.AutoMapper.Environment.SetUp
-{
-    public class MappingFactory : TestFactory
-    {
-        /// <summary>
-        /// Overrides the name of connection string to match the requirements in our pipeline.
-        /// </summary>
-        protected override string ConnectionString => "Default";
+namespace Sagittaras.Repository.Tests.Projection.AutoMapper.Environment.SetUp;
 
-        protected override void OnConfiguring(ServiceCollection services)
+public class MappingFactory : TestFactory
+{
+    /// <summary>
+    ///     Overrides the name of connection string to match the requirements in our pipeline.
+    /// </summary>
+    protected override string ConnectionString => "Default";
+
+    protected override void OnConfiguring(ServiceCollection services)
+    {
+        services.AddDbContext<MappingContext>(contextOptions =>
         {
-            services.AddDbContext<MappingContext>(contextOptions =>
-            {
-                contextOptions.UseNpgsql(GetConnectionString(Engine.DbEngine));
-                contextOptions.UseLazyLoadingProxies();
-            });
-            services.AddScoped<DbContext>(b => b.GetRequiredService<MappingContext>());
-            services.UseRepositoryPattern(options =>
-            {
-                options.AddRepository<UserRepository>();
-                options.UseProjectionAdapter<AutoMapperAdapter>();
-            });
-            services.AddAutoMapper(typeof(MappingFactory).Assembly);
-        }
+            contextOptions.UseNpgsql(GetConnectionString(Engine.DbEngine));
+            contextOptions.UseLazyLoadingProxies();
+        });
+        services.AddScoped<DbContext>(b => b.GetRequiredService<MappingContext>());
+        services.UseRepositoryPattern(options =>
+        {
+            options.AddRepository<UserRepository>();
+            options.UseProjectionAdapter<AutoMapperAdapter>();
+        });
+        services.AddAutoMapper(typeof(MappingFactory).Assembly);
     }
 }

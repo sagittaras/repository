@@ -1,17 +1,16 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace Sagittaras.Repository.Tests.Projection.AutoMapper.Environment.SetUp
+namespace Sagittaras.Repository.Tests.Projection.AutoMapper.Environment.SetUp;
+
+public class MappingContext(DbContextOptions options) : DbContext(options)
 {
-    public class MappingContext(DbContextOptions options) : DbContext(options)
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        modelBuilder.Entity<User>().HasData(new User
         {
-            modelBuilder.Entity<User>().HasData(new User
-            {
-                Id = 1,
-                Username = "Tester",
-                Password = "heslo123"
-            });
-        }
+            Id = 1,
+            Username = "Tester",
+            Password = "heslo123"
+        });
     }
 }

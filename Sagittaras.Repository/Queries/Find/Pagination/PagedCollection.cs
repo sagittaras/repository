@@ -17,17 +17,17 @@ public class PagedCollection<TData> : IPagedCollection<TData>
 
     /// <inheritdoc />
     public int Offset { get; set; }
-    
+
     /// <inheritdoc />
     public ICollection<TData> Data { get; set; } = new List<TData>();
-        
+
     /// <inheritdoc />
     public int Count => Data.Count;
 
     /// <inheritdoc />
     public IEnumerator<object> GetEnumerator()
     {
-        return (IEnumerator<object>) Data.GetEnumerator();
+        return (IEnumerator<object>)Data.GetEnumerator();
     }
 
     /// <inheritdoc />

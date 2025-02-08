@@ -1,12 +1,11 @@
 ﻿using AutoMapper;
 
-namespace Sagittaras.Repository.Tests.Projection.AutoMapper.Environment.Mapping
+namespace Sagittaras.Repository.Tests.Projection.AutoMapper.Environment.Mapping;
+
+public class UserMappingProfile : Profile
 {
-    public class UserMappingProfile : Profile
+    public UserMappingProfile()
     {
-        public UserMappingProfile()
-        {
-            CreateMap<User, UserDto>();
-        }
+        CreateMap<User, UserDto>();
     }
 }
