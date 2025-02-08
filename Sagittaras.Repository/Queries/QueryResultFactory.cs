@@ -8,25 +8,18 @@ namespace Sagittaras.Repository.Queries
     /// <summary>
     /// Default factory implementation for creating a query results.
     /// </summary>
-    public class QueryResultFactory : IQueryResultFactory
+    public class QueryResultFactory(IProjectionAdapter projectionAdapter) : IQueryResultFactory
     {
-        private readonly IProjectionAdapter _projectionAdapter;
-
-        public QueryResultFactory(IProjectionAdapter projectionAdapter)
-        {
-            _projectionAdapter = projectionAdapter;
-        }
-
         /// <inheritdoc />
         public IGetQueryResult<TEntity> CreateGetResult<TEntity>(IQueryable<TEntity> queryable) where TEntity : class
         {
-            return new GetQueryResult<TEntity>(queryable, _projectionAdapter);
+            return new GetQueryResult<TEntity>(queryable, projectionAdapter);
         }
 
         /// <inheritdoc />
         public IFindQueryResult<TEntity> CreateFindResult<TEntity>(IQueryable<TEntity> queryable) where TEntity : class
         {
-            return new FindQueryResult<TEntity>(queryable, _projectionAdapter);
+            return new FindQueryResult<TEntity>(queryable, projectionAdapter);
         }
 
         public IQueryResult<TEntity> CreateQueryResult<TEntity>(IQueryable<TEntity> queryable) where TEntity : class
