@@ -9,16 +9,10 @@ namespace Sagittaras.Repository.Queries.Get
     /// Default implementation of the Query result.
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
-    public class GetQueryResult<TEntity> : QueryResult<TEntity>, IGetQueryResult<TEntity> where TEntity : class
+    public class GetQueryResult<TEntity>(IQueryable<TEntity> queryable, IProjectionAdapter projectionAdapter) : QueryResult<TEntity>(queryable), IGetQueryResult<TEntity>
+        where TEntity : class
     {
-        private readonly IQueryable<TEntity> _queryable;
-        private readonly IProjectionAdapter _projectionAdapter;
-
-        public GetQueryResult(IQueryable<TEntity> queryable, IProjectionAdapter projectionAdapter) : base(queryable)
-        {
-            _queryable = queryable;
-            _projectionAdapter = projectionAdapter;
-        }
+        private readonly IQueryable<TEntity> _queryable = queryable;
 
         /// <inheritdoc />
         public TEntity Single()
@@ -47,25 +41,25 @@ namespace Sagittaras.Repository.Queries.Get
         /// <inheritdoc />
         public TDto SingleProjected<TDto>()
         {
-            return _projectionAdapter.ProjectTo<TDto>(_queryable).Single();
+            return projectionAdapter.ProjectTo<TDto>(_queryable).Single();
         }
 
         /// <inheritdoc />
         public async Task<TDto> SingleProjectedAsync<TDto>()
         {
-            return await _projectionAdapter.ProjectTo<TDto>(_queryable).SingleAsync();
+            return await projectionAdapter.ProjectTo<TDto>(_queryable).SingleAsync();
         }
 
         /// <inheritdoc />
         public TDto FirstProjected<TDto>()
         {
-            return _projectionAdapter.ProjectTo<TDto>(_queryable).First();
+            return projectionAdapter.ProjectTo<TDto>(_queryable).First();
         }
 
         /// <inheritdoc />
         public async Task<TDto> FirstProjectAsync<TDto>()
         {
-            return await _projectionAdapter.ProjectTo<TDto>(_queryable).FirstAsync();
+            return await projectionAdapter.ProjectTo<TDto>(_queryable).FirstAsync();
         }
     }
 }

@@ -8,19 +8,17 @@ using Sagittaras.Repository.Queries.Projection;
 namespace Sagittaras.Repository.Queries.Find
 {
     /// <summary>
-    /// Default implementation of the query result.
+    ///     Represents the result of a query operation for a specific entity type.
     /// </summary>
-    /// <typeparam name="TEntity"></typeparam>
-    public class FindQueryResult<TEntity> : QueryResult<TEntity>, IFindQueryResult<TEntity> where TEntity : class
+    /// <remarks>
+    ///     Provides methods for finding, projecting, and paginating query results,
+    ///     either synchronously or asynchronously.
+    /// </remarks>
+    /// <typeparam name="TEntity">The type of the entity being queried.</typeparam>
+    public class FindQueryResult<TEntity>(IQueryable<TEntity> queryable, IProjectionAdapter projectionAdapter) : QueryResult<TEntity>(queryable), IFindQueryResult<TEntity>
+        where TEntity : class
     {
-        private readonly IQueryable<TEntity> _queryable;
-        private readonly IProjectionAdapter _projectionAdapter;
-
-        public FindQueryResult(IQueryable<TEntity> queryable, IProjectionAdapter projectionAdapter) : base(queryable)
-        {
-            _queryable = queryable;
-            _projectionAdapter = projectionAdapter;
-        }
+        private readonly IQueryable<TEntity> _queryable = queryable;
 
         /// <inheritdoc />
         public ICollection<TEntity> Find()
@@ -43,7 +41,7 @@ namespace Sagittaras.Repository.Queries.Find
         /// <inheritdoc />
         public ICollection<TDto> FindProjected<TDto>()
         {
-            return _projectionAdapter
+            return projectionAdapter
                 .ProjectTo<TDto>(_queryable)
                 .ToList();
         }
@@ -51,7 +49,7 @@ namespace Sagittaras.Repository.Queries.Find
         /// <inheritdoc />
         public async Task<ICollection<TDto>> FindProjectedAsync<TDto>()
         {
-            return await _projectionAdapter
+            return await projectionAdapter
                 .ProjectTo<TDto>(_queryable)
                 .ToListAsync();
         }
@@ -59,7 +57,7 @@ namespace Sagittaras.Repository.Queries.Find
         /// <inheritdoc />
         public async Task<PagedCollection<TDto>> FindProjectedAndPaginatedAsync<TDto>(PaginationQuery query)
         {
-            return await _projectionAdapter
+            return await projectionAdapter
                 .ProjectTo<TDto>(_queryable)
                 .ApplyPaginationAsync(query);
         }

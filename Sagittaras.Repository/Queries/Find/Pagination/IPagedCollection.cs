@@ -8,25 +8,24 @@ namespace Sagittaras.Repository.Queries.Find.Pagination;
 public interface IPagedCollection : IReadOnlyCollection<object>
 {
     /// <summary>
-    /// Total data count in the dataset.
+    ///     Total data count in the dataset.
     /// </summary>
     int Total { get; set; }
         
     /// <summary>
-    /// How many items are in the current page.
+    ///     How many items are in the current page.
     /// </summary>
     int Limit { get; set; }
         
     /// <summary>
-    /// How many items are skipped from the beginning of the dataset.
+    ///     How many items are skipped from the beginning of the dataset.
     /// </summary>
     int Offset { get; set; }
 }
 
 /// <summary>
-///     Generic interface for a collection describing the result of a paginated query.
+///     Represents a collection that supports pagination functionality and describes the result of a query.
 /// </summary>
-/// <typeparam name="TData"></typeparam>
 public interface IPagedCollection<TData> : IPagedCollection
 {
     /// <summary>
