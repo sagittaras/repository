@@ -9,7 +9,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		LICENSE = LICENSE
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sagittaras.Repository.Test", "Sagittaras.Repository.Test\Sagittaras.Repository.Test.csproj", "{5CAC824D-1955-48B4-A253-902F41F85A6D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sagittaras.Repository.Tests", "Sagittaras.Repository.Tests\Sagittaras.Repository.Tests.csproj", "{5CAC824D-1955-48B4-A253-902F41F85A6D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sagittaras.Repository.Projection.AutoMapper", "Sagittaras.Repository.Projection.AutoMapper\Sagittaras.Repository.Projection.AutoMapper.csproj", "{B22C2078-30B5-416C-98CD-CC498FECBF15}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sources", "Sources", "{90E7BC3C-3118-46E3-8C1D-4317AB9F809C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{363EE1E2-253B-4E93-8E91-C09BEAEBBEDF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sagittaras.Repository.Tests.Projection.AutoMapper", "Sagittaras.Repository.Tests.Projection.AutoMapper\Sagittaras.Repository.Tests.Projection.AutoMapper.csproj", "{4B20429A-F0F3-4967-9A20-1A574527809A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,5 +33,19 @@ Global
 		{5CAC824D-1955-48B4-A253-902F41F85A6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5CAC824D-1955-48B4-A253-902F41F85A6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5CAC824D-1955-48B4-A253-902F41F85A6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B22C2078-30B5-416C-98CD-CC498FECBF15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B22C2078-30B5-416C-98CD-CC498FECBF15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B22C2078-30B5-416C-98CD-CC498FECBF15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B22C2078-30B5-416C-98CD-CC498FECBF15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B20429A-F0F3-4967-9A20-1A574527809A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B20429A-F0F3-4967-9A20-1A574527809A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B20429A-F0F3-4967-9A20-1A574527809A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B20429A-F0F3-4967-9A20-1A574527809A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{84564D3A-9B64-401C-B5FD-524023610864} = {90E7BC3C-3118-46E3-8C1D-4317AB9F809C}
+		{B22C2078-30B5-416C-98CD-CC498FECBF15} = {90E7BC3C-3118-46E3-8C1D-4317AB9F809C}
+		{5CAC824D-1955-48B4-A253-902F41F85A6D} = {363EE1E2-253B-4E93-8E91-C09BEAEBBEDF}
+		{4B20429A-F0F3-4967-9A20-1A574527809A} = {363EE1E2-253B-4E93-8E91-C09BEAEBBEDF}
 	EndGlobalSection
 EndGlobal
